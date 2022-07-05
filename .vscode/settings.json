@@ -1,3 +1,4 @@
 {
-    "csharpextensions.privateMemberPrefix": ""
+    "csharpextensions.privateMemberPrefix": "_",
+    "angular.enable-strict-mode-prompt": false
 }
