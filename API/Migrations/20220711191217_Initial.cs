@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.Migrations
 {
-    public partial class FromScratch : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,11 +19,11 @@ namespace API.Migrations
                     PasswordHash = table.Column<byte[]>(type: "BLOB", nullable: true),
                     PasswordSalt = table.Column<byte[]>(type: "BLOB", nullable: true),
                     DateOfBirth = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    KnowAs = table.Column<string>(type: "TEXT", nullable: true),
+                    KnownAs = table.Column<string>(type: "TEXT", nullable: true),
                     Created = table.Column<DateTime>(type: "TEXT", nullable: false),
                     LastActive = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Gender = table.Column<string>(type: "TEXT", nullable: true),
-                    Indroduction = table.Column<string>(type: "TEXT", nullable: true),
+                    Introduction = table.Column<string>(type: "TEXT", nullable: true),
                     LookingFor = table.Column<string>(type: "TEXT", nullable: true),
                     Interests = table.Column<string>(type: "TEXT", nullable: true),
                     City = table.Column<string>(type: "TEXT", nullable: true),
