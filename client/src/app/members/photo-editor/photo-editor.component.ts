@@ -19,10 +19,10 @@ export class PhotoEditorComponent implements OnInit {
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseurl = environment.apiUrl;
-  usr: User;
+  user: User;
 
   constructor(private memberService: MembersService, private accountService: AccountService) { 
-    this.accountService.currentuser$.pipe(take(1)).subscribe(user => this.usr = user);
+    this.accountService.currentuser$.pipe(take(1)).subscribe(user => this.user = user);
   }
 
   ngOnInit(): void {
@@ -35,8 +35,8 @@ export class PhotoEditorComponent implements OnInit {
 
   setMainPhoto(photo: Photo){
     this.memberService.setMainPhoto(photo.id).subscribe(() => {
-      this.usr.photoUrl = photo.url;
-      this.accountService.settCurrentUser(this.usr);
+      this.user.photoUrl = photo.url;
+      this.accountService.settCurrentUser(this.user);
       this.member.photoUrl = photo.url;
       this.member.photos.forEach(p =>{
         if(p.isMain) p.isMain = false;
@@ -48,7 +48,7 @@ export class PhotoEditorComponent implements OnInit {
   initializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseurl + "users/add-photo",
-      authToken: "Bearer " + this.usr.token,
+      authToken: "Bearer " + this.user.token,
       isHTML5: true,
       allowedFileType: ["image"],
       removeAfterUpload: true,
@@ -62,8 +62,13 @@ export class PhotoEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       if(response){
-        const photo = JSON.parse(response);
+        const photo: Photo = JSON.parse(response);
         this.member.photos.push(photo);
+        if(photo.isMain){
+          this.user.photoUrl = photo.url;
+          this.member.photoUrl = photo.url;
+          this.accountService.settCurrentUser(this.user);
+        }
       }
     }
   }
