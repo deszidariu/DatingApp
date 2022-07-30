@@ -10,8 +10,7 @@ import { User } from '../_models/user';
 export class AccountService {
 
   baseUrl = environment.apiUrl;
-  private numberOfPreviousValuesToStore = 1;
-  private currentuserSource = new ReplaySubject<User>(this.numberOfPreviousValuesToStore);
+  private currentuserSource = new ReplaySubject<User>(1);// 1 = numberOfPreviousValuesToStore
   currentuser$ = this.currentuserSource.asObservable();
   constructor(private http: HttpClient) { }
 
@@ -20,7 +19,6 @@ export class AccountService {
       map((response: User) => {
         const user = response;
         if(user){
-          console.log(user.photoUrl);
           this.settCurrentUser(user);
         }
         return user;
