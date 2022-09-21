@@ -26,6 +26,7 @@
     "ng2-file-upload": "^1.4.0",
     "ngx-bootstrap": "^8.0.0",
     "ngx-spinner": "^14.0.0",
+    "ngx-timeago": "^2.0.0",
     "ngx-toastr": "^15.0.0",
     "rxjs": "^7.5.6",
     "tslib": "^2.4.0",

@@ -27,7 +27,7 @@ namespace API.Data
         {
             var query =  _context.Users.AsQueryable();
 
-            query = query.Where( u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
             query = query.Where(u => u.Gender == userParams.Gender);
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
@@ -35,6 +35,12 @@ namespace API.Data
 
             query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
             
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(U => U.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
+
             return await PagedList<MemberDto>.CreateAsync(
                 query.ProjectTo<MemberDto>(this.mapper.ConfigurationProvider).AsNoTracking(), userParams.PageNumber, userParams.PageSize);
         }

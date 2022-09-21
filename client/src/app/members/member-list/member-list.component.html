@@ -2,18 +2,18 @@
     <h2>Your matches - {{pagination?.totalItems}} found</h2>
 </div>
 
-<div class="container">
+<div class="container mb-3">
     <form #form="ngForm" class="form-inline" (ngSubmit)="loadMembers()" autocomplete="off">
-        <label class="me-2">Age from: </label>
+        <label class="me-1">Age from: </label>
         <input type="number" class="me-2" style="width: 70px;" name="minAge" 
             [(ngModel)]="userParams.minAge">
 
-        <label class="me-2">Age to: </label>
+        <label class="me-1">Age to: </label>
         <input type="number" class="me-2" style="width: 70px;" name="maxAge" 
             [(ngModel)]="userParams.maxAge">
 
 
-        <label class="me-2">Show: </label>
+        <label class="me-1">Show: </label>
         <select name="gender" class="me-2" style="width: 130px" [(ngModel)]="userParams.gender">
             <option *ngFor="let gender of genderList" [value]="gender.value">
                 {{gender.display}}
@@ -22,6 +22,18 @@
 
         <button class="btn btn-primary me-2" type="submit">Apply Filters</button>
         <button (click)="resetFilters()" class="btn btn-info me-2" type="submit">Reset Filters</button>
+        <button
+        type="Button" 
+        class="btn btn-primary me-1" 
+        name='orderBy' 
+        (click)="loadMembers()"
+        btnRadio='lastActive'
+        [(ngModel)]="userParams.orderBy">Last Active</button>
+        <button
+        type="Button" 
+        class="btn btn-primary" name='orderBy' (click)="loadMembers()"
+        btnRadio='created'
+        [(ngModel)]="userParams.orderBy">Newest Members</button>
     </form>
 </div>
 
