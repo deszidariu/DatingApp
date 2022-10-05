@@ -20,26 +20,24 @@ export class MembersService {
   userParams: UserParams;
 
   constructor(private http: HttpClient, private accountService: AccountService) {
-    this.accountService.currentuser$.pipe(take(1)).subscribe(user => {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
       this.user = user;
-      console.log(user);
       this.userParams = new UserParams(user);
-      console.log(this.userParams);
     })
-   }
+  }
 
-   resetUserParams(){
+  getUserparams() {
+    return this.userParams;
+  }
+
+  setUserParams(params: UserParams) {
+    this.userParams = params;
+  }
+
+  resetUserParams() {
     this.userParams = new UserParams(this.user);
     return this.userParams;
-   }
-
-   getUserparams(){
-    return this.userParams;
-   }
-
-   setUserParams(params: UserParams){
-    this.userParams = params;
-   }
+  }
 
   getMembers(userParams: UserParams) {
     var response = this.memberCache.get(Object.values(userParams).join('-'));
@@ -87,6 +85,14 @@ export class MembersService {
 
   deletePhoto(photoId: number){
     return this.http.delete(this.baseUrl + "users/delete-photo/" +  photoId);
+  }
+
+  addLike(username: string){
+    return this.http.post(this.baseUrl + "likes/" + username, {});
+  }
+
+  getLikes(predicate: string){
+    return this.http.get<Partial<Member[]>>(this.baseUrl + "likes?predicate=" + predicate); 
   }
 
   private getPaginatedResult<T>(url,params) {
