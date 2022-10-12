@@ -50,13 +50,13 @@
             </td>
             <td>{{message.messageSent | timeago}}</td>
             <td>
-                <button class='btn btn-danger'>Delete</button>
+                <button (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)" class='btn btn-danger'>Delete</button>
             </td>
         </tr>
     </table>
 </div>
 
-<div class="d-flex justify-content-center" *ngIf="pagination">
+<div class="d-flex justify-content-center" *ngIf="pagination && !loading">
     <pagination 
         [boundaryLinks]="true" 
         [totalItems]="pagination.totalItems"
