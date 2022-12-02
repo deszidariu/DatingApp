@@ -11,19 +11,18 @@ import { MessageService } from 'src/app/_services/message.service';
 })
 export class MemeberMessageComponent implements OnInit {
   @ViewChild('messageForm') messageForm: NgForm;
-  @Input() messages: Message[];
   @Input() username: string;
   messageContent: string;
 
-  constructor(private messageServ: MessageService) { }
+  constructor(public messageService: MessageService) { }
 
   ngOnInit(): void {
   }
 
     sendMessage(){
-      this.messageServ.sendMessage(this.username, this.messageContent).subscribe(message =>{
-        this.messages.push(message);
-        this.messageForm.reset();
+      if(!this.username) return;
+      this.messageService.sendMessage(this.username, this.messageContent).then(() => {
+        this.messageForm?.reset();
       })
     }
 }
