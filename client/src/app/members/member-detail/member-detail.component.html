@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col-4">
         <div class="card">
-            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" 
-            class="card-img-top img-thumbnail">
+            <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}"
+                class="card-img-top img-thumbnail">
             <div class="card-body">
-                <div class="mb-2" *ngIf="(presence.onlineUsers$ | async)?.includes(member.username)">
+                <div class="mb-2" *ngIf="(presenceService.onlineUsers$ | async)?.includes(member.username)">
                     <i class="class fa fa-user-circle text-success"></i> Online now
                 </div>
                 <div>
@@ -16,48 +16,42 @@
                     <p>{{member.age}}</p>
                 </div>
                 <div>
-                    <strong>Member since:</strong>
-                    <p>{{member.created | date: 'dd MMM yyyy'}}</p>
-                </div>
-                <div>
-                    <strong>Last Active:</strong>
+                    <strong>Last active:</strong>
                     <p>{{member.lastActive | timeago}}</p>
                 </div>
                 <div>
-                    <strong>Gender:</strong>
-                    <p>{{member.gender}}</p>
+                    <strong>Member since:</strong>
+                    <p>{{member.created | date: 'dd MMM yyyy'}}</p>
                 </div>
             </div>
             <div class="card-footer">
-                <div class="btn-gtoup d-flex">
-                    <button class="btn btn-primary me-2">Like</button>
-                    <button (click)="selectTab(3)" class="btn btn-success">Message</button>
-                </div>        <!-- tab with Id 3 -->
+                <div class="btn-group d-flex">
+                    <button class="btn btn-primary">Like</button>
+                    <button (click)="selectTab('Messages')" class="btn btn-success">Messages</button>
+                </div>
             </div>
         </div>
+
     </div>
 
     <div class="col-8">
         <tabset class="member-tabset" #memberTabs>
-                <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)">
-                    <h4>Description</h4>
-                    <p>{{member.introduction}}</p>
-                    <h4>Looking for</h4>
-                    <p>{{member.lookingFor}}</p>
-                </tab>
-                <tab heading="Interests" (selectTab)="onTabActivated($event)">
-                    <h4>Interests</h4>
-                    <p>{{member.interests}}</p>
-                </tab>
-                <tab heading="Photos" (selectTab)="onTabActivated($event)">
-                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
-                    style="display: inline-block; margin-bottom: 20px;">
-                        
-                    </ngx-gallery>
-                </tab>
-                <tab heading="Messages" (selectTab)="onTabActivated($event)"><!-- tab with Id 3 -->
-                    <app-memeber-message  [username]="member.username"></app-memeber-message>
-                </tab>
+            <tab heading="About {{member.knownAs}}" (selectTab)="onTabActivated($event)" >
+                <h4>Description</h4>
+                <p>{{member.introduction}}</p>
+                <h4>Looking for</h4>
+                <p>{{member.lookingFor}}</p>
+            </tab>
+            <tab heading="Interests" (selectTab)="onTabActivated($event)" >
+                <h4>Interests</h4>
+                <p>{{member.interests}}</p>
+            </tab>
+            <tab heading="Photos" (selectTab)="onTabActivated($event)" >
+                <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+            </tab>
+            <tab heading="Messages" (selectTab)="onTabActivated($event)" >
+                <app-member-messages [username]="member.username"></app-member-messages>
+            </tab>
         </tabset>
     </div>
 </div>

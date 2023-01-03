@@ -1,20 +1,17 @@
-<div class="card mb-4">
+<div class="card mb-4" *ngIf="member">
     <div class="card-img-wrapper">
         <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top">
-        <ul class="lis-inline member-icons animate text-center">
+        <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item">
-                <button routerLink="/members/{{member.username}}" class="btn btn-primary">
-                    <i class="fa fa-user"></i>
-                </button>
+                <button routerLink="/members/{{member.username}}" class="btn btn-primary"><i class="fa fa-user"></i></button>
             </li>
             <li class="list-inline-item">
-                <button (click)="addLike(member)" class="btn btn-primary">
-                    <i class="fa fa-heart"></i>
-                </button>
+                <button (click)="addLike(member)" class="btn btn-primary"><i class="fa fa-heart"></i></button>
             </li>
             <li class="list-inline-item">
-                <button routerLink="/members/{{member.username}}" 
-                    [queryParams]="{tab: 3}"
+                <button
+                    routerLink="/members/{{member.username}}" 
+                    [queryParams]="{tab: 'Messages'}"
                     class="btn btn-primary">
                     <i class="fa fa-envelope"></i>
                 </button>
@@ -23,12 +20,11 @@
     </div>
     <div class="card-body p-1">
         <h6 class="card-title text-center mb-1">
-            <span [class.is-online]="(presence.onlineUsers$ | async)?.includes(member.username)">
-                <i class="fa fa-user me-2">
-                  
-                </i>
+            <span [class.is-online]="(presenceService.onlineUsers$ | async)?.includes(member.username)">
+                <i class="fa fa-user me-2"></i>
             </span>
-            {{member.knownAs}} -- {{member.gender}}
+
+            {{member.knownAs}}, {{member.age}}
         </h6>
         <p class="card-text text-muted text-center">{{member.city}}</p>
     </div>

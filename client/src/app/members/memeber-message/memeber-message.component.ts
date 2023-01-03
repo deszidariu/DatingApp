@@ -5,7 +5,7 @@ import { Message } from 'src/app/_models/message';
 import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
-  selector: 'app-memeber-message',
+  selector: 'app-member-messages',
   templateUrl: './memeber-message.component.html',
   styleUrls: ['./memeber-message.component.css']
 })

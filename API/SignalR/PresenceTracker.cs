@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace API.SignalR
 {
     public class PresenceTracker
     {
-             private static readonly Dictionary<string, List<string>> OnlineUsers = 
+        private static readonly Dictionary<string, List<string>> OnlineUsers = 
             new Dictionary<string, List<string>>();
 
         public Task<bool> UserConnected(string username, string connectionId)
