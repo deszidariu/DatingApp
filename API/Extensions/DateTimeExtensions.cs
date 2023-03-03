@@ -7,10 +7,10 @@ namespace API.Extensions
 {
     public static class DateTimeExtensions
     {
-        public static int CalculateAge(this DateTime dateOfBirth){
-            var today = DateTime.Today;
+        public static int CalculateAge(this DateOnly dateOfBirth){
+            var today = DateOnly.FromDateTime(DateTime.UtcNow);
             var age = today.Year - dateOfBirth.Year;
-            if(dateOfBirth.Date > today.AddYears(-age)) age--;
+            if(dateOfBirth > today.AddYears(-age)) age--;
             return age;
         }
     }

@@ -1,4 +1,8 @@
 {
     "csharpextensions.privateMemberPrefix": "_",
-    "angular.enable-strict-mode-prompt": false
+    "angular.enable-strict-mode-prompt": false,
+    "[csharp]": {
+        "editor.defaultFormatter": "bilal-arikan.csharp-auto-formatter"
+        },
+        "omnisharp.path": "latest"
 }
