@@ -22,10 +22,6 @@ namespace API.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddSingleton<PresenceTracker>();
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
-            });
 
             return services;
         }
