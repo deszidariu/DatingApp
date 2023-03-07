@@ -1,4 +1,4 @@
-# fly.toml file generated for dariuapp111 on 2023-03-03T20:57:56+02:00
+# fly.toml file generated for dariuapp111 on 2023-03-07T15:21:42+02:00
 
 app = "dariuapp111"
 kill_signal = "SIGINT"
@@ -9,11 +9,12 @@ processes = []
   image = "dariudeszi/datingapp:latest"
 
 [env]
-  ASPNETCORE_URLS="http://+:8080"
-  CloudinarySettings__CloudName="dojfjaiqw"
-  CloudinarySettings__ApiKey="521987696496723"
+  ASPNETCORE_URLS = "http://+:8080"
+  CloudinarySettings__CloudName = "dojfjaiqw"
+  CloudinarySettings__ApiKey = "521987696496723"
 
 [experimental]
+  allowed_public_ports = []
   auto_rollback = true
 
 [[services]]
