@@ -37,7 +37,7 @@ else
         var pgPort = pgHostPort.Split(":")[1];
 
         connString = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
-        Console.WriteLine("connected");
+        Console.WriteLine(connString);
 }
 builder.Services.AddDbContext<DataContext>(opt =>
 {
