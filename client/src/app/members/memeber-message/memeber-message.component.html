@@ -46,7 +46,7 @@
                     placeholder="Send a private message">
                 <div class="input-group-append">
                     <button [disabled]="!messageForm.valid || loading" class="btn btn-primary" type="submit">
-                        Send <i **ngIf="loading" class="fa fa-spinner fa-spin"></i>
+                        Send <i *ngIf="loading" class="fa fa-spinner fa-spin"></i>
                     </button>
                 </div>
             </div>
