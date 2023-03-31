@@ -1,5 +1,6 @@
 .dropdown-toggle, .dropdown-item {
     cursor: pointer;
+    padding-left: 35px;
 }
 
 img
